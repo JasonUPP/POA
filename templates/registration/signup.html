@@ -1,0 +1,79 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Registrarse{% endblock %}
+
+{% block content %}
+  <form method="post">
+    {% csrf_token %}
+    <div class="row">
+  		<div class="col-md-8 col-md-offset-2">
+  			<div class="form-group">
+  				<label>Nombre</label>
+  				<input class="form-control" type="text" name="first_name" placeholder="Nombre">
+  			</div>
+  		</div>
+  	</div>
+  	<div class="row">
+  		<div class="col-md-8 col-md-offset-2">
+  			<div class="form-group">
+  				<label >Apellidos</label>
+  				<input class="form-control" type="text" name="last_name" placeholder="Apellidos">
+  			</div>
+  		</div>
+  	</div>
+  	<div class="row">
+  		<div class="col-md-8 col-md-offset-2">
+  			<div class="form-group">
+  				<label >Nombre de usuario</label>
+  				<input class="form-control" type="text" name="username" placeholder="Nombre de usuario">
+  			</div>
+  		</div>
+  	</div>
+  	<div class="row">
+  		<div class="col-md-8 col-md-offset-2">
+  			<div class="form-group">
+  				<label >Correo</label>
+  				<input class="form-control" type="text" name="email" placeholder="Correo">
+  			</div>
+  		</div>
+  	</div>
+  	<div class="row">
+  		<div class="col-md-8 col-md-offset-2">
+  			<div class="form-group">
+  				<label >Contraseña</label>
+  				<input class="form-control" type="password" name="password1" placeholder="Contraseña">
+  			</div>
+  		</div>
+  	</div>
+  	<div class="row">
+  		<div class="col-md-8 col-md-offset-2">
+  			<div class="form-group">
+  				<label >Confirmar contraseña</label>
+  				<input class="form-control" type="password" name="password2" placeholder="Confirmar contraseña">
+  			</div>
+  		</div>
+  	</div>
+
+  	<div class="row">
+  		<div class="col-md-8 col-md-offset-2">
+  			<div class="form-group">
+  				<button class="btn btn-primary "type="submit">Guardar</button>
+  			</div>
+  		</div>
+  </div>
+  {% if form.errors %}
+      {% for field in form %}
+          {% for error in field.errors %}
+              <div class="alert alert-danger">
+                  <strong>{{ error|escape }}</strong>
+              </div>
+          {% endfor %}
+      {% endfor %}
+      {% for error in form.non_field_errors %}
+          <div class="alert alert-danger">
+              <strong>{{ error|escape }}</strong>
+          </div>
+      {% endfor %}
+  {% endif %}
+  </form>
+{% endblock %}

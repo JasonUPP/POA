@@ -1,0 +1,76 @@
+{% extends 'base/base.html' %}
+
+{% block extrastatic %}
+
+{% endblock %}
+{% block title %}Nuevo AnteProyecto{% endblock %}
+
+{% block content %}
+<form method="POST">
+	{% csrf_token %}
+</form>
+
+<table class="table table-hover">
+  <thead>
+    <tr class="table-dark">
+      <td scope="col">Capitulo</td>
+      <td scope="col">Partida</td>
+      <td scope="col">Enero</td>
+      <td scope="col">Febrero</td>
+			<td scope="col">Marzo</td>
+      <td scope="col">Abril</td>
+			<td scope="col">Mayo</td>
+      <td scope="col">Junio</td>
+			<td scope="col">Julio</td>
+      <td scope="col">Agosto</td>
+			<td scope="col">Septiembre</td>
+      <td scope="col">Octubre</td>
+			<td scope="col">Noviembre</td>
+      <td scope="col">Diciembre</td>
+			<td scope="col">Total</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="table-info">
+      <td></td>
+			<td>Column</td>
+      <td>Column</td>
+      <td>Column</td>
+			<td>Column</td>
+      <td>Column</td>
+      <td>Column</td>
+			<td>Column</td>
+      <td>Column</td>
+      <td>Column</td>
+			<td>Column</td>
+      <td>Column</td>
+			<td>Column</td>
+			<td>Column</td>
+			<td>Column</td>
+    </tr>
+  </tbody>
+	<thead>
+		<tr class="table-success">
+			<th scope="col"></th>
+			<th scope="col">Presupuesto Global:</th>
+			<th scope="col">$</th>
+			<th scope="col">$</th>
+			<th scope="col">$</th>
+			<th scope="col">$</th>
+			<th scope="col">$</th>
+			<th scope="col">$</th>
+			<th scope="col">$</th>
+			<th scope="col">$</th>
+			<th scope="col">$</th>
+			<th scope="col">$</th>
+			<th scope="col">$</th>
+			<th scope="col">$</th>
+			<th scope="col">$</th>
+		</tr>
+	</thead>
+</table>
+
+<center>
+<button type="button" class="btn btn-primary">Crear</button>
+</center>
+{% endblock %}

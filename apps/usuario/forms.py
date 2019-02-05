@@ -2,6 +2,9 @@ from django import forms
 from apps.usuario.models import Usuario
 from django.forms import ModelForm
 
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
+
 
 class UsuarioForm(forms.ModelForm):
 	class Meta:
@@ -18,8 +21,9 @@ class UsuarioForm(forms.ModelForm):
 			'telefono',
 			'domicilio',
 		]
-
+		
 		CHOICES=[('Masculino','Femenino')]
+
 		widgets= {
 			'nombre': forms.TextInput(attrs={'class':'form-control'}),
 			'apellidoP': forms.TextInput(attrs={'class':'form-control'}),
@@ -33,3 +37,21 @@ class UsuarioForm(forms.ModelForm):
 			'domicilio' : forms.TextInput(attrs={'class':'form-control'}),
 
 		}
+
+class RegistroForm(UserCreationForm):
+
+	class Meta:
+		model = User
+		fields = [
+				'username',
+				'first_name',
+				'last_name',
+				'email',
+			]
+		labels = {
+				'username': 'Nombre de usuario',
+				'first_name': 'Nombre',
+				'last_name': 'Apellidos',
+				'email': 'Correo',
+				}
+		unique_together = ('email', 'username')

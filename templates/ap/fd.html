@@ -1,0 +1,194 @@
+<!Doctype html>
+<html lang="es">
+<head>
+  <script src="/static/js/jqueryFD-2.1.1.min.js"></script>
+  <script src="/static/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+<meta charset="utf-8">
+	<title></title>
+
+<style>
+	.selected{
+		cursor: pointer;
+    background-color: #497cbd;
+	}
+
+	.selected:hover{
+		background-color: #0585C0;
+		color: white;
+	}
+	.seleccionada{
+		background-color: #e83939;
+		color: white;
+	}
+</style>
+
+<script>
+	$(document).ready(function(){
+		$('#bt_add').click(function(){
+			agregar();
+		});
+		$('#bt_del').click(function(){
+			eliminar(id_fila_selected);
+		});
+		$('#bt_delall').click(function(){
+			eliminarTodasFilas();
+		});
+
+
+	});
+	var cont=0;
+	var id_fila_selected=[];
+
+	function agregar(){
+		cont++;
+		var fila='<tr class="selected" id="fila'+cont+'" onclick="seleccionar(this.id);"><td>'+cont+'</td>'+
+      '<td>Cap</td>'+
+      '<td>Par</td>'+
+      '<td><input class="form-control" type="text" placeholder="Enero" id="inputDefault"></td>'+
+      '<td><input class="form-control" type="text" placeholder="Febrero" id="inputDefault"></td>'+
+      '<td><input class="form-control" type="text" placeholder="Marzo" id="inputDefault"></td>'+
+      '<td><input class="form-control" type="text" placeholder="Abril" id="inputDefault"></td>'+
+      '<td><input class="form-control" type="text" placeholder="Mayo" id="inputDefault"></td>'+
+      '<td><input class="form-control" type="text" placeholder="Junio" id="inputDefault"></td>'+
+      '<td><input class="form-control" type="text" placeholder="Julio" id="inputDefault"></td>'+
+      '<td><input class="form-control" type="text" placeholder="Agosto" id="inputDefault"></td>'+
+      '<td><input class="form-control" type="text" placeholder="Septiembre" id="inputDefault"></td>'+
+      '<td><input class="form-control" type="text" placeholder="Octubre" id="inputDefault"></td>'+
+      '<td><input class="form-control" type="text" placeholder="Noviembre" id="inputDefault"></td>'+
+      '<td><input class="form-control" type="text" placeholder="Diciembre" id="inputDefault"></</td>'+
+      '<td><input class="form-control" id="disabledInput" type="text" placeholder="$$$" disabled=""></td>'+
+      '</tr>';
+		$('#tabla').append(fila);
+		reordenar();
+	}
+
+	function seleccionar(id_fila){
+		if($('#'+id_fila).hasClass('seleccionada')){
+			$('#'+id_fila).removeClass('seleccionada');
+		}
+		else{
+			$('#'+id_fila).addClass('seleccionada');
+		}
+		//2702id_fila_selected=id_fila;
+		id_fila_selected.push(id_fila);
+	}
+
+	function eliminar(id_fila){
+		/*$('#'+id_fila).remove();
+		reordenar();*/
+		for(var i=0; i<id_fila.length; i++){
+			$('#'+id_fila[i]).remove();
+		}
+		reordenar();
+	}
+
+	function reordenar(){
+		var num=1;
+		$('#tabla tbody tr').each(function(){
+			$(this).find('td').eq(0).text(num);
+			num++;
+		});
+	}
+	function eliminarTodasFilas(){
+$('#tabla tbody tr').each(function(){
+			$(this).remove();
+		});
+
+	}
+</script>
+
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand" href="{% url 'index' %}">Inicio</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarColor01">
+    <ul class="navbar-nav mr-auto">
+
+			{% if user.is_authenticated %}
+			<li class="nav-item">
+				<a class="nav-link" href="{% url 'list' %}">Lista<span class="sr-only">(current)</span></a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="{% url 'logout' %}">Cerrar sesión</a>
+			</li>
+			{% else %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'login' %}">Iniciar sesión</a>
+      </li>
+			<li class="nav-item">
+				<a class="nav-link" href="{% url 'signup' %}">Registrar</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="{% url 'admin:index' %}">Administrador</a>
+			</li>
+			{% endif %}
+			<li class="nav-item">
+				<a class="nav-link" href="{% url 'AnteProyecto' %}">Anteproyecto</a>
+			</li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="text" placeholder="Buscar">
+      <button class="btn btn-secondary my-2 my-sm-0" type="submit">Buscar</button>
+    </form>
+  </div>
+</nav>
+
+	<div id="content">
+    <center>
+		<button id="bt_add" class="btn btn-success">Agregar</button>
+		<button id="bt_del" class="btn btn-warning">Eliminar</button>
+		<button id="bt_delall" class="btn btn-danger">Eliminar todo</button>
+    </center>
+
+		<table id="tabla" class="table table-hover">
+		<thead>
+			<tr class="table-active">
+        <td scope="col">ID</td>
+        <td scope="col">Capitulo</td>
+        <td scope="col">Partida</td>
+        <td scope="col">Enero</td>
+        <td scope="col">Febrero</td>
+  			<td scope="col">Marzo</td>
+        <td scope="col">Abril</td>
+  			<td scope="col">Mayo</td>
+        <td scope="col">Junio</td>
+  			<td scope="col">Julio</td>
+        <td scope="col">Agosto</td>
+  			<td scope="col">Septiembre</td>
+        <td scope="col">Octubre</td>
+  			<td scope="col">Noviembre</td>
+        <td scope="col">Diciembre</td>
+  			<td scope="col">Total</td>
+			</tr>
+      <tr class="table-light">
+  			<td scope="col"></td>
+  			<td scope="col">Presupuesto Global:</td>
+  			<td scope="col"></td>
+  			<td scope="col">$</td>
+  			<td scope="col">$</td>
+  			<td scope="col">$</td>
+  			<td scope="col">$</td>
+  			<td scope="col">$</td>
+  			<td scope="col">$</td>
+  			<td scope="col">$</td>
+  			<td scope="col">$</td>
+  			<td scope="col">$</td>
+  			<td scope="col">$</td>
+  			<td scope="col">$</td>
+  			<td scope="col">$</td>
+        <td scope="col">$</td>
+  		</tr>
+		</thead>
+	</table>
+	</div>
+  <center>
+    <button type="button" class="btn btn-primary btn-lg">Crear</button>
+  </center>
+</body>
+</html>
