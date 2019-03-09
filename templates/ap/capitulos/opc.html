@@ -1,0 +1,49 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Elige{% endblock %}
+
+{% block content %}
+<ul class="nav nav-tabs">
+
+  <li class="nav-item">
+    <a class="nav-link active" data-toggle="tab" href="#capitulo">Capitulo</a>
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="#concepto">Concepto</a>
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="#pg">Partida Generica</a>
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="#pe">Partida Especifica</a>
+  </li>
+
+</ul>
+
+<div id="myTabContent" class="tab-content">
+
+  <div class="tab-pane fade active show" id="capitulo">
+    <p>1</p>
+    <a href="{% url 'vercap' %}">Ver</a>
+  </div>
+
+  <div class="tab-pane fade" id="concepto">
+    <p>2</p>
+    <a href="{% url 'vercon' %}">Ver</a>
+  </div>
+
+  <div class="tab-pane fade" id="pg">
+    <p>3</p>
+    <a href="{% url 'verpg' %}">Ver</a>
+  </div>
+
+  <div class="tab-pane fade" id="pe">
+    <p>4</p>
+    <a href="{% url 'verpe' %}">Ver</a>
+  </div>
+
+</div>
+{% endblock %}

@@ -39,8 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'apps.usuario',
-    'apps.validador',
-    'apps.administrador',
     'apps.anteproyecto',
 ]
 

@@ -26,7 +26,5 @@ urlpatterns = [
     path('usuario/', include ('apps.usuario.urls')),
     path('', include ('apps.usuario.urls')),
     path('accounts/login/', auth_views.LoginView.as_view(), name='login'),
-    path('anteproyecto/', include ('apps.anteproyecto.urls')),
-
-
+    path('anteproyecto/', include('apps.anteproyecto.urls')),
 ]

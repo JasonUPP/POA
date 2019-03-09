@@ -4,8 +4,18 @@
 
 {% block content %}
 {% if user.is_authenticated %}
-  Hola {{ user.username }}!
+<div class="jumbotron">
+<h1 class="display-3">Bienvenido {{ user.username }}!</h1>
+<p class="lead">Ya puedes comenzar a crear tus anteproyectos</p>
+<hr class="my-4">
+<p>Todo listo!</p>
+</div>
 {% else %}
-  <p>No has iniciado sesion</p>
+<div class="jumbotron">
+<h1 class="display-3">Bienvenido!</h1>
+<p class="lead">En esta pagina podras registarte, iniciar sesión, administrar, crear anteproyectos y más...</p>
+<hr class="my-4">
+<p>Para poder hacer esto primero debes iniciar sesión o registarte</p>
+</div>
 {% endif %}
 {% endblock %}
